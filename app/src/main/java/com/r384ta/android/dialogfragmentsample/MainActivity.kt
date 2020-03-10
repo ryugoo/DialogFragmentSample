@@ -58,33 +58,33 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         binding.mainButtonCoroutinesWithDialogFragment.setOnClickListener {
-            val dialog = CoroutineDialogFragment.newInstance()
-            dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
-            // launch {
             // val dialog = CoroutineDialogFragment.newInstance()
-
-            // val result = dialog.showNowAndWait(
-            //     supportFragmentManager, CoroutineDialogFragment.TAG
-            // )
-            // toast("$result")
-
             // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
-            // dialog.flow()
-            //     .onEach { toast("$it") }
-            //     .launchIn(this@MainActivity)
+            launch {
+                val dialog = CoroutineDialogFragment.newInstance()
 
-            // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
-            // val result = dialog.result().receive()
-            // toast("$result")
-            // }
+                val result = dialog.showNowAndWait(
+                    supportFragmentManager, CoroutineDialogFragment.TAG
+                )
+                toast("Dialog show and wait / $result")
+
+                // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
+                // dialog.flow()
+                //     .onEach { toast("$it") }
+                //     .launchIn(this@MainActivity)
+                //
+                // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
+                // val result = dialog.result().receive()
+                // toast("$result")
+            }
         }
 
         viewModel.flow()
-            .onEach { toast("$it") }
+            .onEach { toast("ViewModel with Flow / $it") }
             .launchIn(this)
 
         viewModel.liveData.observe(this) {
-            toast("$it")
+            toast("ViewModel with LiveData / $it")
         }
 
         binding.mainButtonViewModelWithDialogFragment.setOnClickListener {
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     private fun toast(message: String) {
-        Toast.makeText(this, "Result is $message", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
 
@@ -154,8 +154,8 @@ class CoroutineDialogFragment : DialogFragment(), CoroutineScope by MainScope() 
     }
 
     private val viewModel: MainViewModel by activityViewModels()
-    private val channel: Channel<Result>
-        get() = viewModel.channel
+    private val channel: Channel<Result> = Channel()
+        // get() = viewModel.channel
 
     override fun onCreateDialog(savedInstanceState: Bundle?) =
         AlertDialog.Builder(requireActivity())
