@@ -58,23 +58,25 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         binding.mainButtonCoroutinesWithDialogFragment.setOnClickListener {
-            launch {
-                val dialog = CoroutineDialogFragment.newInstance()
+            val dialog = CoroutineDialogFragment.newInstance()
+            dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
+            // launch {
+            // val dialog = CoroutineDialogFragment.newInstance()
 
-                // val result = dialog.showNowAndWait(
-                //     supportFragmentManager, CoroutineDialogFragment.TAG
-                // )
-                // toast("$result")
+            // val result = dialog.showNowAndWait(
+            //     supportFragmentManager, CoroutineDialogFragment.TAG
+            // )
+            // toast("$result")
 
-                // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
-                // dialog.flow()
-                //     .onEach { toast("$it") }
-                //     .launchIn(this@MainActivity)
+            // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
+            // dialog.flow()
+            //     .onEach { toast("$it") }
+            //     .launchIn(this@MainActivity)
 
-                dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
-                // val result = dialog.result().receive()
-                // toast("$result")
-            }
+            // dialog.showNow(supportFragmentManager, CoroutineDialogFragment.TAG)
+            // val result = dialog.result().receive()
+            // toast("$result")
+            // }
         }
 
         viewModel.flow()
