@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion 29
+  buildToolsVersion "29.0.2"
+
+  defaultConfig {
+    applicationId "com.r384ta.android.dialogfragmentsample"
+    minSdkVersion 23
+    targetSdkVersion 29
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility 1.8
+    targetCompatibility 1.8
+  }
+
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+
+  dataBinding {
+    enabled = true
+  }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+  kotlinOptions {
+    freeCompilerArgs = [
+      '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+      '-Xuse-experimental=kotlinx.coroutines.FlowPreview'
+    ]
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  implementation 'androidx.appcompat:appcompat:1.1.0'
+  implementation 'androidx.activity:activity:1.1.0'
+  implementation 'androidx.activity:activity-ktx:1.1.0'
+  implementation 'androidx.core:core-ktx:1.2.0'
+  implementation 'androidx.fragment:fragment:1.2.2'
+  implementation 'androidx.fragment:fragment-ktx:1.2.2'
+  implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+  implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+  implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+  implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4'
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4'
+
+  implementation 'io.reactivex.rxjava2:rxjava:2.2.18'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+  implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+  implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.1.0'
+  implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.1.0'
+  implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.1.0'
+
+  implementation 'com.jakewharton.timber:timber:4.7.1'
+
+  testImplementation 'junit:junit:4.13'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+  debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+}

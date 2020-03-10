@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DialogFragmentSample</string>
+    <string name="rx_with_dialog">Rx with Dialog</string>
+    <string name="rx_with_dialog_fragment">Rx with DialogFragment</string>
+    <string name="coroutines_with_dialog">Coroutines with Dialog</string>
+    <string name="coroutines_with_dialog_fragment">Coroutines with DialogFragment</string>
+    <string name="view_model_with_dialog_fragment">ViewModel with DialogFragment</string>
+</resources>
